@@ -1,0 +1,41 @@
+version: '3.9'
+
+services:
+  order:
+    container_name: order
+    build: ./order
+    image: order:v1-dev
+    environment:
+      SERVER_PORT: 8080
+      PROCESS_ORDER_ENPOINT_URL: 'process-order:8080'
+    ports:
+      - "8080:8080"
+    networks:
+      - sales
+
+  process-order:
+    container_name: process-order
+    build: ./process-order
+    image: process-order:v1-dev
+    environment:
+      SERVER_PORT: 8080
+      INVENTORY_ENPOINT_URL: 'inventory:8080'
+    ports:
+      - "8081:8080"
+    networks:
+      - sales
+
+  inventory:
+    container_name: inventory
+    build: ./inventory
+    image: inventory:v1-dev
+    environment:
+      SERVER_PORT: 8080
+    ports:
+      - "8082:8080"
+    networks:
+      - sales
+
+networks:
+  sales:
+    driver: bridge

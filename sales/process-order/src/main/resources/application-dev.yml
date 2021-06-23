@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: process-order
+
+inventoryClient:
+  endpointUrl: localhost:8080
+
+server:
+  port: 8081

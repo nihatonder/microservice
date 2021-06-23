@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: order
+
+processOrderClient:
+  endpointUrl: localhost:8081
+
+server:
+  port: 8082

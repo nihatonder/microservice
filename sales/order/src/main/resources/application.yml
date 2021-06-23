@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: order
+
+processOrderClient:
+  endpointUrl: ${PROCESS_ORDER_ENPOINT_URL:localhost:8081}
+
+server:
+  port: ${SERVER_PORT:8082}

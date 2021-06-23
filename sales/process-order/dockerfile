@@ -1,0 +1,7 @@
+FROM openjdk:8-jdk-slim-buster
+
+COPY ./target/process-order.jar /app.jar
+
+ENTRYPOINT java -Dspring.devtools.restart.enabled=false -Djava.security.egd=file:/dev/./urandom -jar /app.jar
+
+EXPOSE 8080
