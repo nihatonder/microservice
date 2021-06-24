@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-svc
+  labels:
+     name: inventory-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: inventory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: process-order-svc
+  labels:
+     name: process-order-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: http
+  selector:
+    app: process-order
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nonder-order
+
+spec:
+  selector:
+    app: order
+
+  ports:
+    - name: http
+      port: 8080
+      targetPort: 8080
+      protocol: TCP
+      nodePort: 30020
+
+  type: NodePort

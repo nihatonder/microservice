@@ -7,7 +7,7 @@ services:
     image: order:v1-dev
     environment:
       SERVER_PORT: 8080
-      PROCESS_ORDER_ENPOINT_URL: 'process-order:8080'
+      PROCESS_ORDER_ENDPOINT_URL: 'process-order:8080'
     ports:
       - "8080:8080"
     networks:
@@ -19,7 +19,7 @@ services:
     image: process-order:v1-dev
     environment:
       SERVER_PORT: 8080
-      INVENTORY_ENPOINT_URL: 'inventory:8080'
+      INVENTORY_ENDPOINT_URL: 'inventory:8080'
     ports:
       - "8081:8080"
     networks:

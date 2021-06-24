@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory
+spec:
+  selector:
+    matchLabels:
+      app: inventory
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: inventory
+    spec:
+      containers:
+      - name: inventory
+        image: nonder/inventory:v1-dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: process-order
+spec:
+  selector:
+    matchLabels:
+      app: process-order
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: process-order
+    spec:
+      containers:
+      - name: process-order
+        image: nonder/process-order:v1-dev
+        env:
+        - name: INVENTORY_ENDPOINT_URL
+          value: inventory-svc:8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order
+spec:
+  selector:
+    matchLabels:
+      app: order
+  replicas: 1
+  template: # template for the pods
+    metadata:
+      labels:
+        app: order
+    spec:
+      containers:
+      - name: order
+        image: nonder/order:v1-dev
+        env:
+        - name: PROCESS_ORDER_ENDPOINT_URL
+          value: process-order-svc:8080
